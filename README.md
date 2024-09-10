@@ -2,7 +2,7 @@
 
 # IceArrow - A secure file sharing on Walrus
 
-![demo](https://icearrow.walrus.site)
+[demo](https://icearrow.walrus.site)
 
 TBC
 
