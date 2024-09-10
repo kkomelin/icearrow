@@ -7,6 +7,7 @@ export const Header = () => {
   const location = useLocation();
   const isOnUploadPage = location.pathname.includes('upload');
   const base = import.meta.env.VITE_BASE_URL || '';
+  const name = import.meta.env.VITE_APP_NAME || '';
   const home = base + '/#/';
   const upload = base + '/#/upload';
   return (
@@ -14,7 +15,7 @@ export const Header = () => {
       <Toolbar>
         <Link href={home} color="inherit" underline="none">
           <Typography variant="h6" component="div">
-            Yopass
+            {name}
             <Box
               sx={{
                 verticalAlign: 'middle',

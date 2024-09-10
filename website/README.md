@@ -1,8 +1,4 @@
-# Yopass website
-
-[![Build Status](https://travis-ci.com/yopass/website.svg?branch=master)](https://travis-ci.com/yopass/website)
-
-The UI component for [yopass](https://github.com/jhaals/yopass)
+# IceArrow Frontend
 
 ## Local Development
 

@@ -17,7 +17,7 @@ export const Attribution = () => {
 
   return (
     <Container>
-      <Typography
+      {/* <Typography
         margin={4}
         variant="body2"
         color="textSecondary"
@@ -25,7 +25,7 @@ export const Attribution = () => {
       >
         {t('attribution.createdBy')}{' '}
         <Link href="https://github.com/jhaals/yopass">Johan Haals</Link>
-      </Typography>
+      </Typography> */}
       {t('attribution.translatorName') && translationAttribution()}
     </Container>
   );
