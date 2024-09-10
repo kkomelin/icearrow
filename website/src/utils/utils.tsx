@@ -1,9 +1,9 @@
 import {
-  encrypt,
-  decrypt,
-  readMessage,
   createMessage,
+  decrypt,
   DecryptMessageResult,
+  encrypt,
+  readMessage,
 } from 'openpgp';
 
 type Response = {
@@ -34,9 +34,7 @@ const randomInt = (min: number, max: number): number => {
   return min + (byteArray[0] % range);
 };
 
-export const backendDomain = process.env.REACT_APP_BACKEND_URL
-  ? `${process.env.REACT_APP_BACKEND_URL}`
-  : '';
+export const backendDomain = import.meta.env.VITE_BACKEND_URL || '';
 
 export const postSecret = async (body: any): Promise<Response> => {
   return post(backendDomain + '/secret', body);

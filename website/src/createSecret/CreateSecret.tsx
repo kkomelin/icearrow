@@ -79,8 +79,6 @@ const CreateSecret = () => {
     setLoading(false);
   };
 
-  const generateDecryptionKey = watch('generateDecryptionKey');
-
   if (result.uuid) {
     return (
       <Result

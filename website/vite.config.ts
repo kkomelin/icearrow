@@ -1,33 +1,18 @@
+import react from '@vitejs/plugin-react-swc';
 import 'dotenv/config';
-import react from "@vitejs/plugin-react-swc";
-import { defineConfig, UserConfigExport } from 'vite';
+import { defineConfig, loadEnv, UserConfigExport } from 'vite';
 
-export default defineConfig(() => {
-  const PUBLIC_URL = process.env.PUBLIC_URL || '';
+export default defineConfig(({ mode }) => {
+  // Load env file based on `mode` in the current working directory.
+  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+  const env = loadEnv(mode, process.cwd(), '');
 
   const config: UserConfigExport = {
     plugins: [react()],
-    base: PUBLIC_URL,
+    base: env.VITE_BASE_URL || '',
     build: {
       outDir: './build',
-      sourcemap: process.env.NODE_ENV !== 'production',
-    },
-    define: {
-      /*
-       * Attention:
-       * Only non-sensitive values should be included in this object.
-       * These values WILL make it into public JS files as part of the process.env object.
-       * DO NOT put anything sensitive here or spread any object like (...process.env) to expose all values at once.
-       */
-      'process.env': {
-        CI: process.env.CI,
-        NODE_ENV: process.env.NODE_ENV,
-        PUBLIC_URL,
-        REACT_APP_BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
-        REACT_APP_FALLBACK_LANGUAGE: process.env.REACT_APP_FALLBACK_LANGUAGE,
-        START_SERVER_AND_TEST_INSECURE:
-          process.env.START_SERVER_AND_TEST_INSECURE,
-      },
+      sourcemap: env.NODE_ENV !== 'production',
     },
     server: {
       port: 3000,

@@ -7,13 +7,13 @@ The UI component for [yopass](https://github.com/jhaals/yopass)
 ## Local Development
 
 ```bash
-REACT_APP_BACKEND_URL='http://localhost:1337' yarn start
+VITE_BACKEND_URL='http://127.0.0.1:31415' pnpm start
 ```
 
 ## Production Build
 
 ```bash
-PUBLIC_URL='https://my-domain.com' REACT_APP_BACKEND_URL='http://api.my-domain.com' yarn build
+VITE_BASE_URL='https://my-domain.com' VITE_BACKEND_URL='http://api.my-domain.com' pnpm build
 ```
 
 Upload contents of `build/` to your CDN or hosting provider of choice, be it S3, Netlify or GCS.
@@ -34,11 +34,11 @@ The user interface tries to determine the browser's preferred language by using 
 You can change this list in the i18n options in `./src/i18n.tsx`. Please have a look at https://github.com/i18next/i18next-browser-languageDetector for the details.
 
 If the determined language cannot be found, a fallback language is being used. It defaults to English ("en").
-The fallback language can be set at build time using the environment variable REACT_APP_FALLBACK_LANGUAGE.
+The fallback language can be set at build time using the environment variable VITE_FALLBACK_LANGUAGE.
 If you want to change the fallback language, you need to make sure to place a complete language json file under `./public/locales/` containing all keys defined in the original "en.json".
 
-After adding your LOCALE.json file(s) in `./public/locales/`, build the website as usual. Optionally, the environment variable REACT_APP_FALLBACK_LANGUAGE can be set.
+After adding your LOCALE.json file(s) in `./public/locales/`, build the website as usual. Optionally, the environment variable VITE_FALLBACK_LANGUAGE can be set.
 
 ```bash
-PUBLIC_URL='https://my-domain.com' REACT_APP_BACKEND_URL='http://api.my-domain.com' REACT_APP_FALLBACK_LANGUAGE=en yarn build
+VITE_BASE_URL='https://my-domain.com' VITE_BACKEND_URL='http://api.my-domain.com' VITE_FALLBACK_LANGUAGE=en pnpm build
 ```

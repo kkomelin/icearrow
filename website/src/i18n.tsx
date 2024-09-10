@@ -1,7 +1,9 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-http-backend';
+import { initReactI18next } from 'react-i18next';
+
+console.log((import.meta.env.VITE_BASE_URL || '') + '/locales/{{lng}}.json', 'ddd');
 
 i18n
   .use(initReactI18next)
@@ -9,10 +11,10 @@ i18n
   .use(LanguageDetector)
   .init({
     backend: {
-      loadPath: process.env.PUBLIC_URL + '/locales/{{lng}}.json',
+      loadPath: (import.meta.env.VITE_BASE_URL || '') + '/locales/{{lng}}.json',
     },
 
-    fallbackLng: process.env.REACT_APP_FALLBACK_LANGUAGE || 'en',
+    fallbackLng: import.meta.env.VITE_FALLBACK_LANGUAGE || 'en',
     debug: false,
 
     // have a common namespace used around the full app

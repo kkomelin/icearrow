@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button, Box, Link } from '@mui/material';
+import { AppBar, Box, Button, Link, Toolbar, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ export const Header = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const isOnUploadPage = location.pathname.includes('upload');
-  const base = process.env.PUBLIC_URL || '';
+  const base = import.meta.env.VITE_BASE_URL || '';
   const home = base + '/#/';
   const upload = base + '/#/upload';
   return (

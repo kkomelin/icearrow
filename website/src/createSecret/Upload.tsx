@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MAX_UPLOAD_SIZE } from '../config/main';
 import Result from '../displaySecret/Result';
 import Error from '../shared/Error';
 import { randomString, uploadFile } from '../utils/utils';
@@ -13,7 +14,7 @@ import Expiration from './../shared/Expiration';
 import { OneTime } from './CreateSecret';
 
 const Upload = () => {
-  const maxSize = 1024 * 500;
+  const maxSize = MAX_UPLOAD_SIZE;
   const [error, setError] = useState('');
   const { t } = useTranslation();
   const [result, setResult] = useState({
@@ -82,8 +83,6 @@ const Upload = () => {
   const isFileTooLarge =
     fileRejections.length > 0 &&
     fileRejections[0].errors[0].code === 'file-too-large';
-
-  const generateDecryptionKey = watch('generateDecryptionKey');
 
   if (result.uuid) {
     return (

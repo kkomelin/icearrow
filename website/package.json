@@ -25,7 +25,7 @@
     "swr": "^2.2.5"
   },
   "scripts": {
-    "start": "vite --host",
+    "start": "VITE_BACKEND_URL='http://127.0.0.1:31415' vite --host",
     "build": "vite build",
     "test": "cypress run",
     "format": "prettier --ignore-path .gitignore -c --write .",
