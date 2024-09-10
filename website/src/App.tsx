@@ -1,23 +1,12 @@
 import { Container } from '@mui/material';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-
-import { Header } from './shared/Header';
-import { Routing } from './Routing';
-import { Features } from './shared/Features';
-import { Attribution } from './shared/Attribution';
-import { theme } from './theme';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { HashRouter } from 'react-router-dom';
+import { Routing } from './Routing';
+import { Attribution } from './shared/Attribution';
+import { Header } from './shared/Header';
+import { theme } from './theme';
 
 const App = () => {
-  // TODO: Removed in future version.
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker.getRegistrations().then((registrations) => {
-  //     for (const registration of registrations) {
-  //       registration.unregister();
-  //     }
-  //   });
-  // }
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
@@ -25,7 +14,6 @@ const App = () => {
           <Header />
           <Container maxWidth={'lg'}>
             <Routing />
-            <Features />
             <Attribution />
           </Container>
         </HashRouter>

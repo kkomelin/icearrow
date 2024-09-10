@@ -1,25 +1,23 @@
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { useState } from 'react';
+import { Control, Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useForm, Controller, Control } from 'react-hook-form';
+import Result from '../displaySecret/Result';
+import Error from '../shared/Error';
+import Expiration from '../shared/Expiration';
 import randomString, {
   encryptMessage,
   isErrorWithMessage,
   postSecret,
 } from '../utils/utils';
-import { useState } from 'react';
-import Result from '../displaySecret/Result';
-import Error from '../shared/Error';
-import Expiration from '../shared/Expiration';
-import {
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  TextField,
-  Typography,
-  Button,
-  Grid,
-  Box,
-  InputLabel,
-} from '@mui/material';
 
 const CreateSecret = () => {
   const { t } = useTranslation();
@@ -127,10 +125,6 @@ const CreateSecret = () => {
           </Grid>
           <Grid container alignItems="center" direction="column">
             <OneTime control={control} />
-            <SpecifyPasswordToggle control={control} />
-            {!generateDecryptionKey && (
-              <SpecifyPasswordInput control={control} />
-            )}
           </Grid>
           <Grid container justifyContent="center">
             <Box p={2} pb={4}>
@@ -176,53 +170,6 @@ export const OneTime = (props: { control: Control<any> }) => {
         label={t('create.inputOneTimeLabel') as string}
       />
     </Grid>
-  );
-};
-
-export const SpecifyPasswordInput = (props: { control: Control<any> }) => {
-  const { t } = useTranslation();
-  return (
-    <Grid item justifyContent="center">
-      <InputLabel>{t('create.inputPasswordLabel')}</InputLabel>
-      <Controller
-        name="password"
-        control={props.control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            fullWidth
-            type="text"
-            id="password"
-            variant="outlined"
-            inputProps={{
-              autoComplete: 'off',
-              spellCheck: 'false',
-              'data-gramm': 'false',
-            }}
-          />
-        )}
-      />
-    </Grid>
-  );
-};
-
-export const SpecifyPasswordToggle = (props: { control: Control<any> }) => {
-  const { t } = useTranslation();
-  return (
-    <FormGroup>
-      <FormControlLabel
-        control={
-          <Controller
-            name="generateDecryptionKey"
-            control={props.control}
-            render={({ field }) => (
-              <Checkbox {...field} defaultChecked={true} color="primary" />
-            )}
-          />
-        }
-        label={t('create.inputGenerateLabel') as string}
-      />
-    </FormGroup>
   );
 };
 

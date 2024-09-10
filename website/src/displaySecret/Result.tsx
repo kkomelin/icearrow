@@ -1,17 +1,17 @@
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useCopyToClipboard } from 'react-use';
 import {
+  Box,
   Button,
-  Typography,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
-  Box,
+  Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useCopyToClipboard } from 'react-use';
 
 type ResultProps = {
   readonly uuid: string;
@@ -39,11 +39,7 @@ const Result = ({ uuid, password, prefix, customPassword }: ResultProps) => {
       <TableContainer>
         <Table>
           <TableBody>
-            {!customPassword && (
-              <Row label={t('result.rowLabelOneClick')} value={full} />
-            )}
-            <Row label={t('result.rowLabelShortLink')} value={short} />
-            <Row label={t('result.rowLabelDecryptionKey')} value={password} />
+            <Row label={t('result.rowLabelOneClick')} value={full} />
           </TableBody>
         </Table>
       </TableContainer>

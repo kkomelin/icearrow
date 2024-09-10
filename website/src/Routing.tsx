@@ -1,8 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-
 import CreateSecret from './createSecret/CreateSecret';
-import DisplaySecret from './displaySecret/DisplaySecret';
 import Upload from './createSecret/Upload';
+import DisplaySecret from './displaySecret/DisplaySecret';
 
 export const Routing = () => {
   return (

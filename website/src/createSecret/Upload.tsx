@@ -1,20 +1,16 @@
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { encrypt, createMessage } from 'openpgp';
+import { Grid, Typography } from '@mui/material';
+import { createMessage, encrypt } from 'openpgp';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import {
-  OneTime,
-  SpecifyPasswordToggle,
-  SpecifyPasswordInput,
-} from './CreateSecret';
-import Error from '../shared/Error';
-import Expiration from './../shared/Expiration';
-import Result from '../displaySecret/Result';
-import { randomString, uploadFile } from '../utils/utils';
-import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Grid, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import Result from '../displaySecret/Result';
+import Error from '../shared/Error';
+import { randomString, uploadFile } from '../utils/utils';
+import Expiration from './../shared/Expiration';
+import { OneTime } from './CreateSecret';
 
 const Upload = () => {
   const maxSize = 1024 * 500;
@@ -128,12 +124,6 @@ const Upload = () => {
         </Grid>
         <Grid container alignItems="center" direction="column">
           <OneTime control={control} />
-          <SpecifyPasswordToggle control={control} />
-          <Grid container justifyContent="center">
-            {!generateDecryptionKey && (
-              <SpecifyPasswordInput control={control} />
-            )}
-          </Grid>
         </Grid>
       </form>
     </Grid>
