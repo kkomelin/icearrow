@@ -1,5 +1,5 @@
 {
-  "name": "yopass",
+  "name": "website",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -44,7 +44,7 @@
     "@types/react-dom": "^18.3.0",
     "@types/react-dropzone": "^5.1.0",
     "@types/react-router-dom": "^5.3.3",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react-swc": "^3.7.0",
     "cypress": "^13.14.2",
     "cypress-file-upload": "^5.0.8",
     "dotenv": "^16.4.5",

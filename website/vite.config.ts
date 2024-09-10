@@ -1,6 +1,5 @@
 import 'dotenv/config';
-
-import react from '@vitejs/plugin-react';
+import react from "@vitejs/plugin-react-swc";
 import { defineConfig, UserConfigExport } from 'vite';
 
 export default defineConfig(() => {
@@ -11,7 +10,7 @@ export default defineConfig(() => {
     base: PUBLIC_URL,
     build: {
       outDir: './build',
-      sourcemap: true,
+      sourcemap: process.env.NODE_ENV !== 'production',
     },
     define: {
       /*
