@@ -1,0 +1,9 @@
+{
+  "name": "icearrow",
+  "version": "0.1.0",
+  "scripts": {
+    "deploy": "pnpm --filter website run deploy"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -32,7 +32,8 @@
     "lint": "prettier --ignore-path .gitignore  -c .",
     "cypress": "cypress open",
     "cy:run": "cypress run -b chrome",
-    "ci": "start-server-and-test start http://localhost:3000 cy:run"
+    "ci": "start-server-and-test start http://localhost:3000 cy:run",
+    "deploy": "pnpm build && node ./scripts/walrus-site-deploy.cjs"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
@@ -52,7 +53,8 @@
     "prettier": "^3.3.3",
     "start-server-and-test": "^2.0.6",
     "typescript": "^5.5.4",
-    "vite": "^5.4.3"
+    "vite": "^5.4.3",
+    "env-file-rw": "^1.0.0"
   },
   "prettier": {
     "singleQuote": true,
