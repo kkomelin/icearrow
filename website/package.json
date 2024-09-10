@@ -9,7 +9,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mui/material": "^5.16.7",
+    "@mui/material": "^6.0.2",
     "file-saver": "^2.0.5",
     "i18next": "^23.14.0",
     "i18next-browser-languagedetector": "^7.2.1",
@@ -47,13 +47,13 @@
     "cypress": "^13.14.2",
     "cypress-file-upload": "^5.0.8",
     "dotenv": "^16.4.5",
+    "env-file-rw": "^1.0.0",
     "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-import": "^2.30.0",
     "prettier": "^3.3.3",
     "start-server-and-test": "^2.0.6",
     "typescript": "^5.5.4",
-    "vite": "^5.4.3",
-    "env-file-rw": "^1.0.0"
+    "vite": "^5.4.3"
   },
   "prettier": {
     "singleQuote": true,
