@@ -10,13 +10,13 @@ import { HashRouter } from 'react-router-dom';
 
 const App = () => {
   // TODO: Removed in future version.
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then((registrations) => {
-      for (const registration of registrations) {
-        registration.unregister();
-      }
-    });
-  }
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.getRegistrations().then((registrations) => {
+  //     for (const registration of registrations) {
+  //       registration.unregister();
+  //     }
+  //   });
+  // }
 
   return (
     <StyledEngineProvider injectFirst>
