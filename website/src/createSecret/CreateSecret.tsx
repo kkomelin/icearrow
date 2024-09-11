@@ -95,11 +95,11 @@ const CreateSecret = () => {
         message={errors.secret?.message}
         onClick={() => clearErrors('secret')}
       />
-      <Typography component="h1" variant="h4" align="center">
+      {/* <Typography component="h1" variant="h4" align="center">
         {t('create.title')}
-      </Typography>
+      </Typography> */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container justifyContent="center" paddingTop={1}>
+        <Grid container justifyContent="center" paddingTop={0}>
           <Controller
             name="secret"
             control={control}
@@ -109,7 +109,7 @@ const CreateSecret = () => {
                 multiline={true}
                 margin="dense"
                 fullWidth
-                label={t('create.inputSecretLabel')}
+                // label={t('create.inputSecretLabel')}
                 rows="4"
                 autoFocus={true}
                 onKeyDown={onKeyDown}

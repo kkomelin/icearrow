@@ -2,7 +2,7 @@
   "create": {
     "title": "Encrypt message",
     "inputSecretLabel": "Secret message",
-    "inputSecretPlaceholder": "Message to encrypt locally in your browser",
+    "inputSecretPlaceholder": "Text to share securely",
     "buttonEncrypt": "Encrypt Message",
     "buttonEncryptLoading": "Encrypting message...",
     "inputOneTimeLabel": "One-time download",

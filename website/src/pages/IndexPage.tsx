@@ -45,6 +45,7 @@ export default function IndexPage() {
     <Box
       sx={{
         width: '100%',
+        marginTop: '20px',
       }}
     >
       <Box>

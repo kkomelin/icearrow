@@ -1,6 +1,5 @@
-import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid, Typography } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Button, Grid, Typography } from '@mui/material';
 import { createMessage, encrypt } from 'openpgp';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -99,22 +98,49 @@ const Upload = () => {
       {isFileTooLarge && <Error message={t<string>('upload.fileTooLarge')} />}
       <Error message={error} onClick={() => setError('')} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div {...getRootProps()}>
+        <div
+          {...getRootProps()}
+          style={{
+            border: '2px dashed #888888',
+            borderRadius: '6px',
+            padding: '2rem',
+            marginTop: '6px',
+            position: 'relative',
+          }}
+        >
           <input {...getInputProps()} />
-          <Grid container justifyContent="center">
+          {/* <Grid container justifyContent="center">
             <Typography variant="h4">{t('upload.title')}</Typography>
-          </Grid>
-          <Grid container justifyContent="center">
-            <Typography variant="caption" display="block">
-              {t('upload.caption')}
-            </Typography>
-          </Grid>
-          <Grid container justifyContent="center">
+          </Grid> */}
+          {/* <Grid container justifyContent="center">
             <FontAwesomeIcon
               color={isDragActive ? 'blue' : 'black'}
               size="8x"
               icon={faFileUpload}
             />
+
+          </Grid> */}
+          <Grid
+            container
+            justifyContent="left"
+            style={{ position: 'absolute', top: 0, left: 0, padding: '6px' }}
+          >
+            <Typography variant="body2" color="textSecondary" style={{}}>
+              {t('upload.title')} (max: {maxSize / 1024 / 1024} MB)
+            </Typography>
+          </Grid>
+          <Grid container justifyContent="center">
+            <Button
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+              disabled={isDragActive}
+              color="primary"
+            >
+              Upload
+            </Button>
           </Grid>
         </div>
 
