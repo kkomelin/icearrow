@@ -2,7 +2,7 @@
   "name": "icearrow",
   "version": "0.1.0",
   "scripts": {
-    "start": "pnpm --filter website run start",
+    "dev": "pnpm --filter website run dev",
     "deploy": "pnpm --filter website run deploy"
   },
   "dependencies": {},

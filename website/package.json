@@ -2,6 +2,7 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -25,7 +26,7 @@
     "swr": "^2.2.5"
   },
   "scripts": {
-    "start": "VITE_BACKEND_URL='http://127.0.0.1:31415' vite --host",
+    "dev": "VITE_BACKEND_URL='http://127.0.0.1:31415' vite --host",
     "build": "vite build",
     "test": "cypress run",
     "format": "prettier --ignore-path .gitignore -c --write .",
