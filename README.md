@@ -15,10 +15,10 @@ The recipient opens the link and gets the file encrypted. After that, the link e
 
 ## Features
 
-- End-to-End encryption using [OpenPGP](https://openpgpjs.org/)
+- End-to-End encryption with [OpenPGP](https://openpgpjs.org/)
 - Choose between one-time or multiple-time link 
-- No account required
 - Option to expire secrets
+- No account required
 
 ## Credits
 
