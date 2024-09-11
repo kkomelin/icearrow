@@ -11,7 +11,7 @@ The encryption/decryption happens in the browser and the encrypted files are sto
 ## How it works
 
 You upload your file, IceArrow encrypts it and gives you a unique link, which you then send through any available channel. 
-The recipient opens the link and gets the file encrypted. After that, the link expires.
+The recipient opens the link and gets the file encrypted. After that, the link expires. As easy as that.
 
 ## Features
 
