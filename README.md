@@ -8,6 +8,8 @@ The encryption/decryption happens in the browser and the encrypted files are sto
 
 **[Give it a try](https://icearrow.xyz)**
 
+This repository represents the frontend part of the app.
+
 ## How it works
 
 You upload your file, IceArrow encrypts it and gives you a unique link, which you then send through any available channel. 
