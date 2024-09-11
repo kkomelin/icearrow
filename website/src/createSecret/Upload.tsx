@@ -103,7 +103,7 @@ const Upload = () => {
           style={{
             border: '2px dashed #888888',
             borderRadius: '6px',
-            padding: '2rem',
+            padding: '40px',
             marginTop: '6px',
             position: 'relative',
           }}
@@ -123,7 +123,7 @@ const Upload = () => {
           <Grid
             container
             justifyContent="left"
-            style={{ position: 'absolute', top: 0, left: 0, padding: '6px' }}
+            style={{ position: 'absolute', bottom: 0, right: 0, padding: '6px' }}
           >
             <Typography variant="body2" color="textSecondary" style={{}}>
               {t('upload.title')} (max: {maxSize / 1024 / 1024} MB)
