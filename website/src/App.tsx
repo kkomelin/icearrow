@@ -3,7 +3,6 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { HashRouter } from 'react-router-dom';
 import { Routing } from './Routing';
 import { Attribution } from './shared/Attribution';
-import { Header } from './shared/Header';
 import { theme } from './theme';
 
 const App = () => {
@@ -11,7 +10,7 @@ const App = () => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <HashRouter>
-          <Header />
+          {/* <Header /> */}
           <Container maxWidth={'lg'}>
             <Routing />
             <Attribution />
