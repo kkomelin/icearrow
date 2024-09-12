@@ -28,7 +28,7 @@
   },
   "scripts": {
     "dev": "VITE_BACKEND_URL='http://127.0.0.1:31415' vite --host",
-    "build": "VITE_BACKEND_URL='http://api.icearrow.xyz' vite build",
+    "build": "VITE_BACKEND_URL='https://api.icearrow.xyz' vite build",
     "test": "cypress run",
     "format": "prettier --ignore-path .gitignore -c --write .",
     "lint": "prettier --ignore-path .gitignore  -c .",
