@@ -45,6 +45,11 @@ const CreateSecret = () => {
     const pw = randomString();
     setLoading(true);
     try {
+      if (form.secret.trim().length === 0) {
+        setError('secret', { message: t('create.inputSecretRequired') });
+        return;
+      }
+
       const { data, status } = await postSecret({
         expiration: DEFAULT_LINK_EXPIRATION_TIME,
         message: await encryptMessage(form.secret, pw),
@@ -100,6 +105,7 @@ const CreateSecret = () => {
               <TextField
                 {...field}
                 multiline={true}
+                required
                 margin="dense"
                 fullWidth
                 // label={t('create.inputSecretLabel')}

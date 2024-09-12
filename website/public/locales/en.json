@@ -7,7 +7,8 @@
     "buttonEncryptLoading": "Encrypting message...",
     "inputOneTimeLabel": "One-time download",
     "inputPasswordLabel": "Custom decryption key",
-    "inputGenerateLabel": "Generate decryption key"
+    "inputGenerateLabel": "Generate decryption key",
+    "inputSecretRequired": "Secret message is required"
   },
   "upload": {
     "title": "Drop file to upload",
