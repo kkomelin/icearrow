@@ -15,12 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Error from '../shared/Error';
 import { isErrorWithMessage } from '../utils/utils';
-
-const deleteSecret = async (url: string): Promise<Response> => {
-  return await fetch(url, {
-    method: 'DELETE',
-  });
-};
+import { deleteSecret } from '../utils/secret';
 
 const DeleteSecret = ({ url }: { readonly url: string }) => {
   const { t } = useTranslation();

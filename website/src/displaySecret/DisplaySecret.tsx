@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useSWR from 'swr';
-import { backendDomain, decryptMessage } from '../utils/utils';
-import Secret from './Secret';
-import ErrorPage from './Error';
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { useAsync } from 'react-use';
-import DeleteSecret from './DeleteSecret';
+import useSWRImmutable from 'swr/immutable';
+import { deleteSecret } from '../utils/secret';
+import {
+  backendDomain,
+  decryptMessage,
+  isErrorWithMessage,
+} from '../utils/utils';
+import ErrorPage from './Error';
+import Secret from './Secret';
 
 const fetcher = async (url: string) => {
   const request = await fetch(url);
@@ -97,10 +101,14 @@ const DisplaySecret = () => {
   }, [password, key]);
 
   // Load the secret data when required
-  const { data, error } = useSWR(loadSecret ? url : null, fetcher, {
-    shouldRetryOnError: false,
-    revalidateOnFocus: false,
-  });
+  const { data, error, mutate } = useSWRImmutable(
+    loadSecret ? url : null,
+    fetcher,
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+    },
+  );
 
   // Decrypt the secret if password or data is changed
   const {
@@ -118,6 +126,21 @@ const DisplaySecret = () => {
       isFile ? 'binary' : 'utf8',
     );
   }, [password, data]);
+
+  const handleSecreteDelete = async (): Promise<void> => {
+    try {
+      const response = await deleteSecret(url);
+
+      if (response.status !== 204) {
+        const data = await response.json();
+        console.error(data.message);
+      }
+    } catch (e) {
+      if (isErrorWithMessage(e)) {
+        console.error(e.message);
+      }
+    }
+  };
 
   // Handle the loaded of the secret
   if (loadSecret) {
@@ -142,24 +165,26 @@ const DisplaySecret = () => {
       />
     );
   }
+
   if (value) {
     return (
       <>
         <Secret secret={value.data as string} fileName={value.filename} />
-        {data.one_time ? null : <DeleteSecret url={url} />}
       </>
     );
   }
-
-  // If there is no password we need to fetch it.
   return (
-    <EnterDecryptionKey
-      password=""
-      setPassword={(password: string) => {
-        setPassword(password);
-        setLoadSecret(true);
+    <Button
+      variant="contained"
+      onClick={() => {
+        mutate();
+        handleSecreteDelete();
+        setPassword('');
+        setLoadSecret(false);
       }}
-    />
+    >
+      Reveal Secret
+    </Button>
   );
 };
 
