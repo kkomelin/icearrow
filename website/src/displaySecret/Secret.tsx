@@ -36,13 +36,7 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
     <div>
       <Typography variant="h4">{t('secret.titleMessage')}</Typography>
       <Typography>{t('secret.subtitleMessage')}</Typography>
-      <Button
-        color={copy.error ? 'secondary' : 'primary'}
-        onClick={() => copyToClipboard(secret)}
-        startIcon={<FontAwesomeIcon icon={faCopy} />}
-      >
-        {t('secret.buttonCopy')}
-      </Button>
+
       <Typography
         id="pre"
         data-test-id="preformatted-text-secret"
@@ -57,10 +51,20 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
           wordBreak: 'break-all',
           whiteSpace: 'pre-wrap',
           fontFamily: 'monospace, monospace', // https://github.com/necolas/normalize.css/issues/519#issuecomment-197131966
+          marginTop: '16px',
+          marginBottom: '16px',
         }}
       >
         {secret}
       </Typography>
+      <Button
+        color={copy.error ? 'secondary' : 'primary'}
+        onClick={() => copyToClipboard(secret)}
+        startIcon={<FontAwesomeIcon icon={faCopy} />}
+        variant="contained"
+      >
+        {t('secret.buttonCopy')}
+      </Button>
     </div>
   );
 };
