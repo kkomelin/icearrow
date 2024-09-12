@@ -27,7 +27,6 @@ const Upload = () => {
   const { t } = useTranslation();
   const [result, setResult] = useState({
     password: '',
-    customPassword: false,
     uuid: '',
   });
 
@@ -77,7 +76,6 @@ const Upload = () => {
             setResult({
               uuid: data.message,
               password: pw,
-              customPassword: false,
             });
           }
         } catch (e) {
@@ -112,14 +110,7 @@ const Upload = () => {
     fileRejections[0].errors[0].code === 'file-too-large';
 
   if (result.uuid) {
-    return (
-      <Result
-        uuid={result.uuid}
-        password={result.password}
-        prefix="f"
-        customPassword={result.customPassword}
-      />
-    );
+    return <Result uuid={result.uuid} password={result.password} prefix="f" />;
   }
   return (
     <Grid>
@@ -183,7 +174,7 @@ const Upload = () => {
                 disabled={isDragActive}
                 color="primary"
               >
-                Upload
+                Encrypt file
               </Button>
               {loading && <CircularProgress color="primary" size={20} />}
             </Box>

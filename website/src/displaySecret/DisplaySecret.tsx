@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ErrorMessage from '../shared/ErrorMessage';
-import { getSecret } from '../utils/secret';
+import { deleteSecret, getSecret } from '../utils/secret';
 import {
   backendDomain,
   decryptMessage,
@@ -46,14 +46,13 @@ const DisplaySecret = () => {
 
       setValue(decryptedMessage);
 
-      // @todo: Delete secret.
+      // Delete secret.
 
-      // const response = await deleteSecret(url);
-
-      // if (response.status !== 204) {
-      //   const data = await response.json();
-      //   console.error(data.message);
-      // }
+      const response = await deleteSecret(url);
+      if (response.status !== 204) {
+        const data = await response.json();
+        console.error(data.message);
+      }
     } catch (e) {
       if (isErrorWithMessage(e)) {
         setError(e as any);
