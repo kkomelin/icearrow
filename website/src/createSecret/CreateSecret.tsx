@@ -7,7 +7,7 @@ import {
   DEFAULT_LINK_EXPIRATION_TIME,
 } from '../config/main';
 import Result from '../displaySecret/Result';
-import Error from '../shared/Error';
+import ErrorMessage from '../shared/ErrorMessage';
 import randomString, {
   encryptMessage,
   isErrorWithMessage,
@@ -89,7 +89,7 @@ const CreateSecret = () => {
   }
   return (
     <>
-      <Error
+      <ErrorMessage
         message={errors.secret?.message}
         onClick={() => clearErrors('secret')}
       />
@@ -141,7 +141,7 @@ const CreateSecret = () => {
                   <span>{t('create.buttonEncrypt')}</span>
                 )}
               </Button>
-              {loading && <CircularProgress color="inherit" size={20} />}
+              {loading && <CircularProgress color="primary" size={20} />}
             </Box>
           </Grid>
         </Grid>

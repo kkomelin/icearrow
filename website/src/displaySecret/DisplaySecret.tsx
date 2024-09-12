@@ -1,190 +1,104 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Button, CircularProgress } from '@mui/material';
+import { DecryptMessageResult } from 'openpgp';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { useAsync } from 'react-use';
-import useSWRImmutable from 'swr/immutable';
-import { deleteSecret } from '../utils/secret';
+import ErrorMessage from '../shared/ErrorMessage';
+import { getSecret } from '../utils/secret';
 import {
   backendDomain,
   decryptMessage,
   isErrorWithMessage,
 } from '../utils/utils';
-import ErrorPage from './Error';
 import Secret from './Secret';
-
-const fetcher = async (url: string) => {
-  const request = await fetch(url);
-  if (!request.ok) {
-    throw new Error('Failed to fetch secret');
-  }
-  return await request.json();
-};
-
-const EnterDecryptionKey = ({
-  setPassword,
-  password,
-  loaded,
-}: {
-  setPassword: (password: string) => any;
-  readonly password?: string;
-  readonly loaded?: boolean;
-}) => {
-  const { t } = useTranslation();
-  const [tempPassword, setTempPassword] = useState(password);
-  const invalidPassword = !!password;
-
-  const submitPassword = () => {
-    if (tempPassword) {
-      setPassword(tempPassword);
-    }
-  };
-  return (
-    <Container maxWidth="lg">
-      <Grid container direction="column" spacing={1}>
-        <Grid item xs={12}>
-          <Typography variant="h5">
-            {t('display.titleDecryptionKey')}
-          </Typography>
-          {loaded ? (
-            <Typography variant="caption">
-              {t('display.captionDecryptionKey')}
-            </Typography>
-          ) : null}
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            autoFocus
-            name="decryptionKey"
-            id="decryptionKey"
-            placeholder={t('display.inputDecryptionKeyPlaceholder')}
-            label={t('display.inputDecryptionKeyLabel')}
-            value={tempPassword}
-            error={invalidPassword}
-            helperText={invalidPassword && t('display.errorInvalidPassword')}
-            onChange={(e) => setTempPassword(e.target.value)}
-            inputProps={{ spellCheck: 'false', 'data-gramm': 'false' }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" onClick={submitPassword}>
-            {t('display.buttonDecrypt')}
-          </Button>
-        </Grid>
-      </Grid>
-    </Container>
-  );
-};
 
 const DisplaySecret = () => {
   const { t } = useTranslation();
-  const { format, key, password: paramsPassword } = useParams();
+  const { format, key, password } = useParams();
+  const [error, setError] = useState<Error>();
+  const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState<DecryptMessageResult>();
 
   const isFile = format === 'f';
   const url = isFile
     ? `${backendDomain}/file/${key}`
     : `${backendDomain}/secret/${key}`;
 
-  const [password, setPassword] = useState(paramsPassword);
-  const [loadSecret, setLoadSecret] = useState(!!password);
+  const loadSecret = async (url: string, password: string | undefined) => {
+    setLoading(true);
 
-  // Ensure that we unload the password when this param changes
-  useEffect(() => {
-    setPassword(paramsPassword);
-    setLoadSecret(!!paramsPassword);
-  }, [paramsPassword, key]);
-
-  // Ensure that we unload the secret when the key changes
-  useEffect(() => {
-    setLoadSecret(!!password);
-  }, [password, key]);
-
-  // Load the secret data when required
-  const { data, error, mutate } = useSWRImmutable(
-    loadSecret ? url : null,
-    fetcher,
-    {
-      shouldRetryOnError: false,
-      revalidateOnFocus: false,
-    },
-  );
-
-  // Decrypt the secret if password or data is changed
-  const {
-    loading,
-    error: decryptError,
-    value,
-  } = useAsync(async () => {
-    if (!data || !password) {
-      return;
-    }
-
-    return await decryptMessage(
-      data.message,
-      password,
-      isFile ? 'binary' : 'utf8',
-    );
-  }, [password, data]);
-
-  const handleSecreteDelete = async (): Promise<void> => {
     try {
-      const response = await deleteSecret(url);
+      // Get blob.
 
-      if (response.status !== 204) {
-        const data = await response.json();
-        console.error(data.message);
+      const data = await getSecret(url);
+
+      if (data == null || password == null) {
+        // @todo: handle error better.
+        return;
       }
+
+      // Decrypt blob.
+      const decryptedMessage = await decryptMessage(
+        data.message,
+        password,
+        isFile ? 'binary' : 'utf8',
+      );
+
+      setValue(decryptedMessage);
+
+      // @todo: Delete secret.
+
+      // const response = await deleteSecret(url);
+
+      // if (response.status !== 204) {
+      //   const data = await response.json();
+      //   console.error(data.message);
+      // }
     } catch (e) {
       if (isErrorWithMessage(e)) {
-        console.error(e.message);
+        setError(e as any);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Handle the loaded of the secret
-  if (loadSecret) {
-    if (error) {
-      return <ErrorPage error={error} />;
-    }
-    if (!data) {
-      return <Typography variant="h4">{t('display.titleFetching')}</Typography>;
-    }
-  }
-
-  // Handle the decrypting
-  if (loading) {
-    return <Typography variant="h4">{t('display.titleDecrypting')}</Typography>;
-  }
-  if (decryptError) {
-    return (
-      <EnterDecryptionKey
-        password={password}
-        setPassword={setPassword}
-        loaded={true}
-      />
-    );
-  }
-
-  if (value) {
-    return (
-      <>
-        <Secret secret={value.data as string} fileName={value.filename} />
-      </>
-    );
-  }
   return (
-    <Button
-      variant="contained"
-      onClick={() => {
-        mutate();
-        handleSecreteDelete();
-        setPassword('');
-        setLoadSecret(false);
+    <Box
+      sx={{
+        width: '100%',
+        marginTop: '20px',
       }}
     >
-      Reveal Secret
-    </Button>
+      {value ? (
+        <Secret secret={value.data as string} fileName={value.filename} />
+      ) : (
+        <Box>
+          <ErrorMessage
+            message={error?.message}
+            // onClick={() => clearErrors('secret')}
+          />
+          <Box
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <Button
+              variant="contained"
+              disabled={loading}
+              onClick={() => loadSecret(url, password)}
+            >
+              Reveal Secret
+            </Button>
+            {loading && <CircularProgress color="primary" size={20} />}
+          </Box>
+        </Box>
+      )}
+    </Box>
   );
 };
 

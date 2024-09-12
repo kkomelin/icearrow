@@ -1,21 +1,21 @@
-import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Alert,
   Button,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogTitle,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import Error from '../shared/Error';
-import { isErrorWithMessage } from '../utils/utils';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import ErrorMessage from '../shared/ErrorMessage';
 import { deleteSecret } from '../utils/secret';
+import { isErrorWithMessage } from '../utils/utils';
 
 const DeleteSecret = ({ url }: { readonly url: string }) => {
   const { t } = useTranslation();
@@ -78,7 +78,7 @@ const DeleteSecret = ({ url }: { readonly url: string }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Error message={error} />
+            <ErrorMessage message={error} />
             {t('delete.dialogMessage')}
           </DialogContentText>
         </DialogContent>

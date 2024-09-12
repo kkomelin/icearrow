@@ -18,7 +18,7 @@ import {
   DEFAULT_MAX_UPLOAD_SIZE,
 } from '../config/main';
 import Result from '../displaySecret/Result';
-import Error from '../shared/Error';
+import ErrorMessage from '../shared/ErrorMessage';
 import { isErrorWithMessage, randomString, uploadFile } from '../utils/utils';
 
 const Upload = () => {
@@ -123,9 +123,11 @@ const Upload = () => {
   }
   return (
     <Grid>
-      {isFileTooLarge && <Error message={t('upload.errorFileTooLarge')} />}
+      {isFileTooLarge && (
+        <ErrorMessage message={t('upload.errorFileTooLarge')} />
+      )}
       {!isFileTooLarge && (
-        <Error
+        <ErrorMessage
           message={errors.secret?.message}
           onClick={() => clearErrors('secret')}
         />
@@ -183,7 +185,7 @@ const Upload = () => {
               >
                 Upload
               </Button>
-              {loading && <CircularProgress color="inherit" size={20} />}
+              {loading && <CircularProgress color="primary" size={20} />}
             </Box>
           </Grid>
         </div>
