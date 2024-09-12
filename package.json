@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "pnpm --filter website run dev",
+    "build": "pnpm --filter website run build",
     "deploy": "pnpm --filter website run deploy"
   },
   "dependencies": {},

@@ -2,4 +2,3 @@ export const DEFAULT_MAX_UPLOAD_SIZE = 1024 * 1024 * 1; // 1MB
 export const DEFAULT_NEED_TO_GENERATE_DECRYPTION_KEY = true;
 export const DEFAULT_LINK_EXPIRATION_TIME = 604800; // 7 days
 export const DEFAULT_IS_ONETIME_LINK = false;
-  

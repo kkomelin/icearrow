@@ -27,7 +27,6 @@ const Upload = () => {
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       secret: '',
-      password: '',
     },
   });
 
@@ -39,7 +38,7 @@ const Upload = () => {
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = async () => {
         handleSubmit(onSubmit)();
-        const pw = form.password ? form.password : randomString();
+        const pw = randomString();
         const message = await encrypt({
           format: 'armored',
           message: await createMessage({
