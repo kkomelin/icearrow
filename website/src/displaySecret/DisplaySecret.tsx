@@ -3,6 +3,7 @@ import { DecryptMessageResult } from 'openpgp';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import Layout from '../layout/Layout';
 import ErrorMessage from '../shared/ErrorMessage';
 import { deleteSecret, getSecret } from '../utils/secret';
 import {
@@ -63,19 +64,14 @@ const DisplaySecret = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        marginTop: '20px',
-      }}
-    >
+    <Layout>
       {value ? (
         <Secret secret={value.data as string} fileName={value.filename} />
       ) : (
         <Box>
           <ErrorMessage
             message={error?.message}
-            // onClick={() => clearErrors('secret')}
+            onClick={() => setError(undefined)}
           />
           <Box
             style={{
@@ -91,13 +87,15 @@ const DisplaySecret = () => {
               disabled={loading}
               onClick={() => loadSecret(url, password)}
             >
-              Reveal Secret
+              {loading
+                ? t('display.buttonDecryptLoading')
+                : t('display.buttonDecrypt')}
             </Button>
             {loading && <CircularProgress color="primary" size={20} />}
           </Box>
         </Box>
       )}
-    </Box>
+    </Layout>
   );
 };
 

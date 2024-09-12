@@ -2,7 +2,7 @@
   "create": {
     "title": "Encrypt message",
     "inputSecretLabel": "Secret message",
-    "inputSecretPlaceholder": "Text to share securely",
+    "inputSecretPlaceholder": "Secret to share securely",
     "buttonEncrypt": "Encrypt Message",
     "buttonEncryptLoading": "Encrypting message...",
     "inputOneTimeLabel": "One-time download",
@@ -13,7 +13,9 @@
   "upload": {
     "title": "Drop file to upload",
     "caption": "File upload is designed for small files like ssh keys and certificates.",
-    "errorFileTooLarge": "File is too large"
+    "errorFileTooLarge": "File is too large",
+    "buttonUpload": "Encrypt File",
+    "buttonUploadLoading": "Encrypting File..."
   },
   "display": {
     "titleFetching": "Fetching from database, please hold...",
@@ -23,7 +25,8 @@
     "inputDecryptionKeyPlaceholder": "Decryption Key",
     "inputDecryptionKeyLabel": "A decryption key is required, please enter it below",
     "errorInvalidPassword": "Invalid password, please try again",
-    "buttonDecrypt": "Decrypt Secret"
+    "buttonDecrypt": "Decrypt Secret",
+    "buttonDecryptLoading": "Decrypting Secret..."
   },
   "error": {
     "title": "Secret does not exist",

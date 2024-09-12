@@ -151,7 +151,13 @@ const Upload = () => {
               padding: '6px',
             }}
           >
-            <Typography variant="body2" color="textSecondary" style={{}}>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              style={{
+                fontSize: '12px',
+              }}
+            >
               {t('upload.title')} (max: {maxSize / 1024 / 1024} MB)
             </Typography>
           </Grid>
@@ -171,10 +177,12 @@ const Upload = () => {
                 variant="contained"
                 tabIndex={-1}
                 startIcon={<CloudUploadIcon />}
-                disabled={isDragActive}
+                disabled={isDragActive || loading}
                 color="primary"
               >
-                Encrypt file
+                {loading
+                  ? t('upload.buttonUploadLoading')
+                  : t('upload.buttonUpload')}
               </Button>
               {loading && <CircularProgress color="primary" size={20} />}
             </Box>

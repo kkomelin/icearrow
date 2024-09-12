@@ -83,7 +83,6 @@ const CreateSecret = () => {
         password={result.password}
         uuid={result.uuid}
         prefix="s"
-        customPassword={result.customPassword}
       />
     );
   }
@@ -115,6 +114,7 @@ const CreateSecret = () => {
                 placeholder={t('create.inputSecretPlaceholder')}
                 inputProps={{ spellCheck: 'false', 'data-gramm': 'false' }}
                 error={!!errors.secret}
+                helperText={'Encrypt in the browser before sending'}
               />
             )}
           />

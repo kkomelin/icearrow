@@ -1,14 +1,36 @@
-import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
-import { Button, Typography } from '@mui/material';
-import { useCopyToClipboard } from 'react-use';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Typography, useTheme } from '@mui/material';
 import { saveAs } from 'file-saver';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useCopyToClipboard } from 'react-use';
+import Layout from '../layout/Layout';
+
+const Secret = ({
+  secret,
+  fileName,
+}: {
+  readonly secret: string;
+  readonly fileName?: string;
+}) => {
+  return (
+    <Layout>
+      {fileName ? (
+        <DownloadSecret fileName={fileName} secret={secret} />
+      ) : (
+        <RenderSecret secret={secret} />
+      )}
+    </Layout>
+  );
+};
+
+export default Secret;
 
 const RenderSecret = ({ secret }: { readonly secret: string }) => {
   const { t } = useTranslation();
   const [copy, copyToClipboard] = useCopyToClipboard();
+  const theme = useTheme();
 
   return (
     <div>
@@ -17,8 +39,9 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
       <Button
         color={copy.error ? 'secondary' : 'primary'}
         onClick={() => copyToClipboard(secret)}
+        startIcon={<FontAwesomeIcon icon={faCopy} />}
       >
-        <FontAwesomeIcon icon={faCopy} /> {t('secret.buttonCopy')}
+        {t('secret.buttonCopy')}
       </Button>
       <Typography
         id="pre"
@@ -26,7 +49,7 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
         sx={{
           backgroundColor: '#ecf0f1',
           padding: '15px',
-          border: '1px solid #cccccc',
+          border: '1px solid ' + theme.palette.primary.main,
           display: 'block',
           fontSize: '1rem',
           borderRadius: '4px',
@@ -66,19 +89,3 @@ const DownloadSecret = ({
     </div>
   );
 };
-
-const Secret = ({
-  secret,
-  fileName,
-}: {
-  readonly secret: string;
-  readonly fileName?: string;
-}) => {
-  if (fileName) {
-    return <DownloadSecret fileName={fileName} secret={secret} />;
-  }
-
-  return <RenderSecret secret={secret} />;
-};
-
-export default Secret;

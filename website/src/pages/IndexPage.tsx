@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import * as React from 'react';
 import CreateSecret from '../createSecret/CreateSecret';
 import Upload from '../createSecret/Upload';
+import Layout from '../layout/Layout';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -42,12 +43,7 @@ export default function IndexPage() {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        marginTop: '20px',
-      }}
-    >
+    <Layout>
       <Box>
         <Tabs value={value} onChange={handleChange} aria-label="tabs" centered>
           <Tab label="Text" {...a11yProps(0)} />
@@ -60,6 +56,6 @@ export default function IndexPage() {
       <CustomTabPanel value={value} index={1}>
         <Upload />
       </CustomTabPanel>
-    </Box>
+    </Layout>
   );
 }
