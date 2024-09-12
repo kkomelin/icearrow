@@ -2,6 +2,10 @@ import { Box, Button, Grid, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import {
+  DEFAULT_IS_ONETIME_LINK,
+  DEFAULT_LINK_EXPIRATION_TIME,
+} from '../config/main';
 import Result from '../displaySecret/Result';
 import Error from '../shared/Error';
 import randomString, {
@@ -42,8 +46,9 @@ const CreateSecret = () => {
     setLoading(true);
     try {
       const { data, status } = await postSecret({
+        expiration: DEFAULT_LINK_EXPIRATION_TIME,
         message: await encryptMessage(form.secret, pw),
-        one_time: form.onetime,
+        one_time: DEFAULT_IS_ONETIME_LINK,
       });
 
       if (status !== 200) {

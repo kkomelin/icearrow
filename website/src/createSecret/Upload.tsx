@@ -6,8 +6,8 @@ import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
-  DEFAULT_EXPIRATION_TIME,
   DEFAULT_IS_ONETIME_LINK,
+  DEFAULT_LINK_EXPIRATION_TIME,
   DEFAULT_MAX_UPLOAD_SIZE,
 } from '../config/main';
 import Result from '../displaySecret/Result';
@@ -49,7 +49,7 @@ const Upload = () => {
           passwords: pw,
         });
         const { data, status } = await uploadFile({
-          expiration: DEFAULT_EXPIRATION_TIME,
+          expiration: DEFAULT_LINK_EXPIRATION_TIME,
           message,
           one_time: DEFAULT_IS_ONETIME_LINK,
         });
