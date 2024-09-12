@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Box, Button, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from 'react-use';
-import ShareButton from '../createSecret/ShareButton';
+import ShareButtons from '../createSecret/ShareButtons';
 
 type ResultProps = {
   readonly uuid: string;
@@ -29,12 +29,22 @@ const Result = ({ uuid, password, prefix }: ResultProps) => {
           p: 2,
           borderRadius: '6px',
           mb: 2,
+          color: theme.palette.grey[700],
+          wordBreak: 'break-all',
         }}
       >
         {full}
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '16px',
+        }}
+      >
         <Box>
           <Button
             startIcon={<FontAwesomeIcon icon={faCopy} />}
@@ -46,7 +56,7 @@ const Result = ({ uuid, password, prefix }: ResultProps) => {
           </Button>
         </Box>
         <Box>
-          <ShareButton url={full} />
+          <ShareButtons url={full} title="Secret" />
         </Box>
       </Box>
     </Box>
