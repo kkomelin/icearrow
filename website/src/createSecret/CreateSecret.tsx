@@ -1,18 +1,9 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Grid, TextField } from '@mui/material';
 import { useState } from 'react';
-import { Control, Controller, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Result from '../displaySecret/Result';
 import Error from '../shared/Error';
-import Expiration from '../shared/Expiration';
 import randomString, {
   encryptMessage,
   isErrorWithMessage,
@@ -30,9 +21,7 @@ const CreateSecret = () => {
     clearErrors,
   } = useForm({
     defaultValues: {
-      generateDecryptionKey: true,
       secret: '',
-      onetime: true,
     },
   });
   const [loading, setLoading] = useState(false);
@@ -49,12 +38,10 @@ const CreateSecret = () => {
   };
 
   const onSubmit = async (form: any): Promise<void> => {
-    // Use the manually entered password, or generate one
-    const pw = form.password ? form.password : randomString();
+    const pw = randomString();
     setLoading(true);
     try {
       const { data, status } = await postSecret({
-        expiration: parseInt(form.expiration),
         message: await encryptMessage(form.secret, pw),
         one_time: form.onetime,
       });
@@ -63,7 +50,7 @@ const CreateSecret = () => {
         setError('secret', { type: 'submit', message: data.message });
       } else {
         setResult({
-          customPassword: form.password ? true : false,
+          customPassword: false,
           password: pw,
           uuid: data.message,
         });
@@ -113,17 +100,11 @@ const CreateSecret = () => {
                 rows="4"
                 autoFocus={true}
                 onKeyDown={onKeyDown}
-                placeholder={t<string>('create.inputSecretPlaceholder')}
+                placeholder={t('create.inputSecretPlaceholder')}
                 inputProps={{ spellCheck: 'false', 'data-gramm': 'false' }}
               />
             )}
           />
-          <Grid container justifyContent="center" marginTop={2}>
-            <Expiration control={control} />
-          </Grid>
-          <Grid container alignItems="center" direction="column">
-            <OneTime control={control} />
-          </Grid>
           <Grid container justifyContent="center">
             <Box p={2} pb={4}>
               <Button
@@ -142,32 +123,6 @@ const CreateSecret = () => {
         </Grid>
       </form>
     </>
-  );
-};
-
-export const OneTime = (props: { control: Control<any> }) => {
-  const { t } = useTranslation();
-
-  return (
-    <Grid item justifyContent="center">
-      <FormControlLabel
-        control={
-          <Controller
-            name="onetime"
-            control={props.control}
-            render={({ field }) => (
-              <Checkbox
-                {...field}
-                id="enable-onetime"
-                defaultChecked={true}
-                color="primary"
-              />
-            )}
-          />
-        }
-        label={t('create.inputOneTimeLabel') as string}
-      />
-    </Grid>
   );
 };
 

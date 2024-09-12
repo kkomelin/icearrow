@@ -5,15 +5,17 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MAX_UPLOAD_SIZE } from '../config/main';
+import {
+  DEFAULT_EXPIRATION_TIME,
+  DEFAULT_IS_ONETIME_LINK,
+  DEFAULT_MAX_UPLOAD_SIZE,
+} from '../config/main';
 import Result from '../displaySecret/Result';
 import Error from '../shared/Error';
 import { randomString, uploadFile } from '../utils/utils';
-import Expiration from './../shared/Expiration';
-import { OneTime } from './CreateSecret';
 
 const Upload = () => {
-  const maxSize = MAX_UPLOAD_SIZE;
+  const maxSize = DEFAULT_MAX_UPLOAD_SIZE;
   const [error, setError] = useState('');
   const { t } = useTranslation();
   const [result, setResult] = useState({
@@ -24,11 +26,8 @@ const Upload = () => {
 
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      generateDecryptionKey: true,
       secret: '',
       password: '',
-      expiration: '3600',
-      onetime: true,
     },
   });
 
@@ -50,9 +49,9 @@ const Upload = () => {
           passwords: pw,
         });
         const { data, status } = await uploadFile({
-          expiration: parseInt(form.expiration),
+          expiration: DEFAULT_EXPIRATION_TIME,
           message,
-          one_time: form.onetime,
+          one_time: DEFAULT_IS_ONETIME_LINK,
         });
 
         if (status !== 200) {
@@ -61,7 +60,7 @@ const Upload = () => {
           setResult({
             uuid: data.message,
             password: pw,
-            customPassword: form.password ? true : false,
+            customPassword: false,
           });
         }
       };
@@ -95,7 +94,7 @@ const Upload = () => {
   }
   return (
     <Grid>
-      {isFileTooLarge && <Error message={t<string>('upload.fileTooLarge')} />}
+      {isFileTooLarge && <Error message={t('upload.fileTooLarge')} />}
       <Error message={error} onClick={() => setError('')} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div
@@ -123,7 +122,12 @@ const Upload = () => {
           <Grid
             container
             justifyContent="left"
-            style={{ position: 'absolute', bottom: 0, right: 0, padding: '6px' }}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              padding: '6px',
+            }}
           >
             <Typography variant="body2" color="textSecondary" style={{}}>
               {t('upload.title')} (max: {maxSize / 1024 / 1024} MB)
@@ -143,13 +147,6 @@ const Upload = () => {
             </Button>
           </Grid>
         </div>
-
-        <Grid container justifyContent="center" mt="15px">
-          <Expiration control={control} />
-        </Grid>
-        <Grid container alignItems="center" direction="column">
-          <OneTime control={control} />
-        </Grid>
       </form>
     </Grid>
   );
