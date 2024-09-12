@@ -8,7 +8,6 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from 'react-use';
@@ -30,12 +29,12 @@ const Result = ({ uuid, password, prefix, customPassword }: ResultProps) => {
 
   return (
     <Box>
-      <Typography variant="h4">{t('result.title')}</Typography>
+      {/* <Typography variant="h4">{t('result.title')}</Typography>
       <Typography>
         {t('result.subtitleDownloadOnce')}
         <br />
         {t('result.subtitleChannel')}
-      </Typography>
+      </Typography> */}
       <TableContainer>
         <Table>
           <TableBody>
@@ -64,9 +63,6 @@ const Row = ({ label, value }: RowProps) => {
         >
           <FontAwesomeIcon icon={faCopy} />
         </Button>
-      </TableCell>
-      <TableCell width="100" padding="none">
-        <strong>{label}</strong>
       </TableCell>
       <TableCell>{value}</TableCell>
     </TableRow>
