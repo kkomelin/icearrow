@@ -1,50 +1,31 @@
-import { AppBar, Box, Button, Link, Toolbar, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { Box, Link, Typography } from '@mui/material';
 
 export const Header = () => {
-  const { t } = useTranslation();
-  const location = useLocation();
-  const isOnUploadPage = location.pathname.includes('upload');
-  const base = import.meta.env.VITE_BASE_URL || '';
   const name = import.meta.env.VITE_APP_NAME || '';
-  const home = base + '/#/';
-  const upload = base + '/#/upload';
   return (
-    <AppBar position="static" color="transparent" sx={{ marginBottom: 4 }}>
-      <Toolbar>
-        <Link href={home} color="inherit" underline="none">
-          <Typography variant="h6" component="div">
-            {name}
-            <Box
-              sx={{
-                verticalAlign: 'middle',
-                paddingLeft: '5px',
-                width: '40px',
-                height: '40px',
-              }}
-              component="img"
-              height="40"
-              alt=""
-              src="yopass.svg"
-            />
-          </Typography>
-        </Link>
+    <Box
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Link href="/" color="inherit" underline="none">
+        <Typography variant="h6" component="div">
+          {name}
+        </Typography>
         <Box
           sx={{
-            marginLeft: 'auto',
+            verticalAlign: 'middle',
+            width: '80px',
+            height: '80px',
           }}
-        >
-          <Button
-            component={Link}
-            href={isOnUploadPage ? home : upload}
-            variant="contained"
-            color="primary"
-          >
-            {isOnUploadPage ? t('header.buttonHome') : t('header.buttonUpload')}
-          </Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
+          component="img"
+          height="40"
+          alt=""
+          src="/logo.webp"
+        />
+      </Link>
+    </Box>
   );
 };
