@@ -1,5 +1,12 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { createMessage, encrypt } from 'openpgp';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -36,6 +43,8 @@ const Upload = () => {
       secret: '',
     },
   });
+
+  const theme = useTheme();
 
   const form = watch();
   const onDrop = useCallback(
@@ -131,7 +140,7 @@ const Upload = () => {
               ? 'red'
               : isDragActive
                 ? 'blue'
-                : 'black',
+                : theme.palette.primary.main,
             borderRadius: '6px',
             padding: '40px',
             marginTop: '6px',
