@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -67,8 +67,9 @@ const CreateSecret = () => {
           message: e.message,
         });
       }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (result.uuid) {
@@ -111,7 +112,17 @@ const CreateSecret = () => {
             )}
           />
           <Grid container justifyContent="center">
-            <Box p={2} pb={4}>
+            <Box
+              p={2}
+              pb={4}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
               <Button
                 onClick={() => handleSubmit(onSubmit)()}
                 variant="contained"
@@ -123,6 +134,7 @@ const CreateSecret = () => {
                   <span>{t('create.buttonEncrypt')}</span>
                 )}
               </Button>
+              {loading && <CircularProgress color="inherit" size={20} />}
             </Box>
           </Grid>
         </Grid>

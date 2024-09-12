@@ -1,5 +1,5 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Button, Grid, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { createMessage, encrypt } from 'openpgp';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -12,11 +12,11 @@ import {
 } from '../config/main';
 import Result from '../displaySecret/Result';
 import Error from '../shared/Error';
-import { randomString, uploadFile } from '../utils/utils';
+import { isErrorWithMessage, randomString, uploadFile } from '../utils/utils';
 
 const Upload = () => {
   const maxSize = DEFAULT_MAX_UPLOAD_SIZE;
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const [result, setResult] = useState({
     password: '',
@@ -24,7 +24,14 @@ const Upload = () => {
     uuid: '',
   });
 
-  const { control, handleSubmit, watch } = useForm({
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setError,
+    clearErrors,
+  } = useForm({
     defaultValues: {
       secret: '',
     },
@@ -38,29 +45,41 @@ const Upload = () => {
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = async () => {
         handleSubmit(onSubmit)();
-        const pw = randomString();
-        const message = await encrypt({
-          format: 'armored',
-          message: await createMessage({
-            binary: new Uint8Array(reader.result as ArrayBuffer),
-            filename: acceptedFiles[0].name,
-          }),
-          passwords: pw,
-        });
-        const { data, status } = await uploadFile({
-          expiration: DEFAULT_LINK_EXPIRATION_TIME,
-          message,
-          one_time: DEFAULT_IS_ONETIME_LINK,
-        });
 
-        if (status !== 200) {
-          setError(data.message);
-        } else {
-          setResult({
-            uuid: data.message,
-            password: pw,
-            customPassword: false,
+        try {
+          const pw = randomString();
+          const message = await encrypt({
+            format: 'armored',
+            message: await createMessage({
+              binary: new Uint8Array(reader.result as ArrayBuffer),
+              filename: acceptedFiles[0].name,
+            }),
+            passwords: pw,
           });
+          const { data, status } = await uploadFile({
+            expiration: DEFAULT_LINK_EXPIRATION_TIME,
+            message,
+            one_time: DEFAULT_IS_ONETIME_LINK,
+          });
+
+          if (status !== 200) {
+            setError('secret', { type: 'submit', message: data.message });
+          } else {
+            setResult({
+              uuid: data.message,
+              password: pw,
+              customPassword: false,
+            });
+          }
+        } catch (e) {
+          if (isErrorWithMessage(e)) {
+            setError('secret', {
+              type: 'submit',
+              message: e.message,
+            });
+          }
+        } finally {
+          setLoading(false);
         }
       };
       acceptedFiles.forEach((file) => reader.readAsArrayBuffer(file));
@@ -75,7 +94,9 @@ const Upload = () => {
       onDrop,
     });
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    setLoading(true);
+  };
 
   const isFileTooLarge =
     fileRejections.length > 0 &&
@@ -93,13 +114,20 @@ const Upload = () => {
   }
   return (
     <Grid>
-      {isFileTooLarge && <Error message={t('upload.fileTooLarge')} />}
-      <Error message={error} onClick={() => setError('')} />
+      {isFileTooLarge && <Error message={t('upload.errorFileTooLarge')} />}
+      {!isFileTooLarge && (
+        <Error
+          message={errors.secret?.message}
+          onClick={() => clearErrors('secret')}
+        />
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div
           {...getRootProps()}
           style={{
-            border: '2px dashed #888888',
+            borderWidth: '2px',
+            borderStyle: 'dashed',
+            borderColor: isDragActive ? 'blue' : 'black',
             borderRadius: '6px',
             padding: '40px',
             marginTop: '6px',
@@ -107,17 +135,6 @@ const Upload = () => {
           }}
         >
           <input {...getInputProps()} />
-          {/* <Grid container justifyContent="center">
-            <Typography variant="h4">{t('upload.title')}</Typography>
-          </Grid> */}
-          {/* <Grid container justifyContent="center">
-            <FontAwesomeIcon
-              color={isDragActive ? 'blue' : 'black'}
-              size="8x"
-              icon={faFileUpload}
-            />
-
-          </Grid> */}
           <Grid
             container
             justifyContent="left"
@@ -133,17 +150,28 @@ const Upload = () => {
             </Typography>
           </Grid>
           <Grid container justifyContent="center">
-            <Button
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-              disabled={isDragActive}
-              color="primary"
+            <Box
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+              }}
             >
-              Upload
-            </Button>
+              <Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                startIcon={<CloudUploadIcon />}
+                disabled={isDragActive}
+                color="primary"
+              >
+                Upload
+              </Button>
+              {loading && <CircularProgress color="inherit" size={20} />}
+            </Box>
           </Grid>
         </div>
       </form>
