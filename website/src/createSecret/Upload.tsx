@@ -127,7 +127,11 @@ const Upload = () => {
           style={{
             borderWidth: '2px',
             borderStyle: 'dashed',
-            borderColor: isDragActive ? 'blue' : 'black',
+            borderColor: !!errors.secret
+              ? 'red'
+              : isDragActive
+                ? 'blue'
+                : 'black',
             borderRadius: '6px',
             padding: '40px',
             marginTop: '6px',

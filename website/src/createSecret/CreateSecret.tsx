@@ -114,6 +114,7 @@ const CreateSecret = () => {
                 onKeyDown={onKeyDown}
                 placeholder={t('create.inputSecretPlaceholder')}
                 inputProps={{ spellCheck: 'false', 'data-gramm': 'false' }}
+                error={!!errors.secret}
               />
             )}
           />
