@@ -1,6 +1,6 @@
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Typography, useTheme } from '@mui/material';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import { saveAs } from 'file-saver';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,9 +32,21 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
   const theme = useTheme();
 
   return (
-    <div>
-      <Typography variant="h4">{t('secret.titleMessage')}</Typography>
-      <Typography color='textSecondary'>{t('secret.subtitleMessage')}</Typography>
+    <Box sx={{ width: '100%' }}>
+      <Typography
+        variant="h2"
+        color="primary"
+        component="div"
+        sx={{
+          fontSize: '1.5rem',
+          fontWeight: 300,
+          textAlign: 'center',
+          my: 5,
+          px: 3,
+        }}
+      >
+        {t('secret.subtitleMessage')}
+      </Typography>
 
       <Typography
         id="pre"
@@ -64,7 +76,7 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
       >
         {t('secret.buttonCopy')}
       </Button>
-    </div>
+    </Box>
   );
 };
 
@@ -87,8 +99,21 @@ const DownloadSecret = ({
   }, [fileName, secret]);
 
   return (
-    <div>
-      <Typography variant="h4">{t('secret.titleFile')}</Typography>
-    </div>
+    <Box sx={{ width: '100%' }}>
+      <Typography
+        variant="h2"
+        color="primary"
+        component="div"
+        sx={{
+          fontSize: '1.5rem',
+          fontWeight: 300,
+          textAlign: 'center',
+          my: 5,
+          px: 3,
+        }}
+      >
+        {t('secret.titleFile')}
+      </Typography>
+    </Box>
   );
 };

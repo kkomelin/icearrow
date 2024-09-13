@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { DecryptMessageResult } from 'openpgp';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -68,6 +68,22 @@ const DisplaySecret = () => {
         <Secret secret={value.data as string} fileName={value.filename} />
       ) : (
         <Box>
+          <Typography
+            variant="h2"
+            color="primary"
+            component="div"
+            sx={{
+              fontSize: '1.5rem',
+              fontWeight: 300,
+              textAlign: 'center',
+              my: 5,
+              px: 3,
+            }}
+          >
+            You've received an encrypted secret. Press the button below to
+            decrypt it.
+          </Typography>
+
           <ErrorMessage
             message={error?.message}
             onClick={() => setError(undefined)}
