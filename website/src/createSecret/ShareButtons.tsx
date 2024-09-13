@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { FC } from 'react';
 import {
   EmailIcon,
@@ -15,6 +15,8 @@ interface IShareButtonsProps {
 }
 
 const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -26,6 +28,7 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
       }}
     >
       <TelegramShareButton
+        title="Send via Telegram"
         url={url}
         style={{
           display: 'flex',
@@ -34,10 +37,15 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
           alignItems: 'center',
         }}
       >
-        <TelegramIcon size={32} round />
+        <TelegramIcon
+          size={32}
+          round
+          bgStyle={{ fill: theme.palette.primary.main }}
+        />
       </TelegramShareButton>
 
       <WhatsappShareButton
+        title="Send via Whatsapp"
         url={url}
         separator=":: "
         style={{
@@ -47,10 +55,15 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
           alignItems: 'center',
         }}
       >
-        <WhatsappIcon size={32} round />
+        <WhatsappIcon
+          size={32}
+          round
+          bgStyle={{ fill: theme.palette.primary.main }}
+        />
       </WhatsappShareButton>
 
       <EmailShareButton
+        title="Send via email"
         url={url}
         subject={title}
         style={{
@@ -60,7 +73,11 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
           alignItems: 'center',
         }}
       >
-        <EmailIcon size={32} round />
+        <EmailIcon
+          size={32}
+          round
+          bgStyle={{ fill: theme.palette.primary.main }}
+        />
       </EmailShareButton>
     </Box>
   );
