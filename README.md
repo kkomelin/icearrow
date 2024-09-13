@@ -1,6 +1,4 @@
-<!-- ![Yopass-horizontal](https://user-images.githubusercontent.com/37777956/59544367-0867aa80-8f09-11e9-8d6a-02008e1bccc7.png) -->
-
-# IceArrow - Secure Secret Sharing on Walrus
+# IceArrow - Secure Secret Sharing on Walrus 
 
 IceArrow lets you share a secret message or file with anyone in a quick and secure manner.
 
@@ -18,9 +16,8 @@ The recipient opens the link and gets the file encrypted. After that, the link e
 ## Features
 
 - End-to-End encryption with [OpenPGP](https://openpgpjs.org/)
-- Choose between one-time or multiple-time link 
-- Option to expire secrets
-- No account required
+- One-time links
+- No account/wallet required
 
 ## Credits
 
