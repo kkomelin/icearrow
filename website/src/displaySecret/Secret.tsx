@@ -52,12 +52,12 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
         id="pre"
         data-test-id="preformatted-text-secret"
         sx={{
-          backgroundColor: '#ecf0f1',
-          padding: '15px',
-          border: '1px solid ' + theme.palette.primary.main,
+          backgroundColor: '#f9fcfe',
+          p:2,
+          border: '2px solid ' + theme.palette.primary.main,
           display: 'block',
           fontSize: '1rem',
-          borderRadius: '4px',
+          borderRadius: '6px',
           wordWrap: 'break-word',
           wordBreak: 'break-all',
           whiteSpace: 'pre-wrap',

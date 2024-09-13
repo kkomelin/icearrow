@@ -25,12 +25,16 @@ const Result = ({ uuid, password, prefix }: ResultProps) => {
     <Box>
       <Box
         sx={{
+          backgroundColor: '#f9fcfe',
           border: '2px solid' + theme.palette.primary.main,
           p: 2,
           borderRadius: '6px',
           mb: 2,
           color: theme.palette.grey[700],
+          wordWrap: 'break-word',
           wordBreak: 'break-all',
+          fontSize: '1rem',
+          fontFamily: 'monospace, monospace', // https://github.com/necolas/normalize.css/issues/519#issuecomment-197131966
         }}
       >
         {full}
