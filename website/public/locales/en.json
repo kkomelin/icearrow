@@ -48,7 +48,7 @@
     "rowLabelDecryptionKey": "Decryption Key"
   },
   "secret": {
-    "titleFile": "File downloaded",
+    "titleFile": "The secret file has been downloaded. Find it in your browser downloads.",
     "titleMessage": "Decrypted Message",
     "subtitleMessage": "This secret might not be viewable again, make sure to save it now!",
     "buttonCopy": "Copy"
