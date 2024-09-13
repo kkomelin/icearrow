@@ -35,7 +35,7 @@ const RenderSecret = ({ secret }: { readonly secret: string }) => {
   return (
     <div>
       <Typography variant="h4">{t('secret.titleMessage')}</Typography>
-      <Typography>{t('secret.subtitleMessage')}</Typography>
+      <Typography color='textSecondary'>{t('secret.subtitleMessage')}</Typography>
 
       <Typography
         id="pre"
