@@ -4,13 +4,14 @@ import { HashRouter } from 'react-router-dom';
 import { Routing } from './Routing';
 import { Attribution } from './shared/Attribution';
 import { theme } from './theme';
+import { Header } from './shared/Header';
 
 const App = () => {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <HashRouter>
-          {/* <Header /> */}
+          <Header />
           <Container maxWidth={'lg'}>
             <Routing />
             <Attribution />

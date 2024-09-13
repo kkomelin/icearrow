@@ -1,10 +1,10 @@
 {
   "create": {
-    "title": "Encrypt message",
+    "title": "Encrypt secret",
     "inputSecretLabel": "Secret message",
     "inputSecretPlaceholder": "Secret to share securely",
-    "buttonEncrypt": "Encrypt Message",
-    "buttonEncryptLoading": "Encrypting message...",
+    "buttonEncrypt": "Encrypt Secret",
+    "buttonEncryptLoading": "Encrypting secret...",
     "inputOneTimeLabel": "One-time download",
     "inputPasswordLabel": "Custom decryption key",
     "inputGenerateLabel": "Generate decryption key",
