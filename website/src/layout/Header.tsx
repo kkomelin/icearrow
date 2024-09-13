@@ -28,6 +28,9 @@ export const Header = () => {
           justifyContent: 'center',
           alignItems: 'center',
           gap: '0.8rem',
+          '&:hover img': {
+            animation: 'rotateAnimation 2s infinite linear',
+          },
         }}
       >
         <Box
