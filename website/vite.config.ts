@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
+            react: ['react', 'react-dom', 'react-router-dom'],
             later: ['react-share', 'react-dropzone', 'openpgp', 'file-saver'],
           },
         },
