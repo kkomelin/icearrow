@@ -8,7 +8,7 @@ The encryption/decryption happens in the browser and the encrypted files are sto
 
 **[Give it a try](https://icearrow.xyz)**
 
-This repository represents the frontend part of the app.
+This repository represents the frontend part of the app. The Golang backend is here [b3b/hippos](https://github.com/b3b/hippos).
 
 ## How it works
 
