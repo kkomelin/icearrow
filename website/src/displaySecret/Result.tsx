@@ -25,7 +25,7 @@ const Result = ({ uuid, password, prefix }: ResultProps) => {
     <Box>
       <Box
         sx={{
-          backgroundColor: '#f9fcfe',
+          // backgroundColor: '#f9fcfe',
           border: '2px solid' + theme.palette.primary.main,
           p: 2,
           borderRadius: '6px',
