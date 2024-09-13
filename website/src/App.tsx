@@ -3,8 +3,8 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { HashRouter } from 'react-router-dom';
 import { Routing } from './Routing';
 import { Attribution } from './shared/Attribution';
-import { theme } from './theme';
 import { Header } from './shared/Header';
+import { theme } from './theme';
 
 const App = () => {
   return (

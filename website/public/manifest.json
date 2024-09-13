@@ -1,20 +1,21 @@
 {
-  "short_name": "IceArrow",
-  "name": "IceArrow",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "favicon.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    "name": "Ice Arrow",
+    "short_name": "Ice Arrow",
+    "description": "Secure Secret Sharing on Walrus",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/?utm_source=pwa"
 }
