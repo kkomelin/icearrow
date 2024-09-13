@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const Header = () => {
   const name = import.meta.env.VITE_APP_NAME || '';
+  const description = import.meta.env.VITE_APP_DESCRIPTION || '';
 
   const theme = useTheme();
 
@@ -10,10 +11,12 @@ export const Header = () => {
     <Box
       style={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '30px',
         marginBottom: '50px',
+        gap: '1rem',
       }}
     >
       <Link

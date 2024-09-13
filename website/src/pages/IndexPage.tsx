@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -43,6 +44,19 @@ export default function IndexPage() {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <Typography
+        variant="h2"
+        color="primary"
+        component="div"
+        sx={{
+          fontSize: '1.5rem',
+          fontWeight: 400,
+          textAlign: 'center',
+          marginBottom: '1.5rem',
+        }}
+      >
+        Encode your secret and share it with a secure one-time link
+      </Typography>
       <Box>
         <Tabs value={value} onChange={handleChange} aria-label="tabs" centered>
           <Tab label="Text" {...a11yProps(0)} />
