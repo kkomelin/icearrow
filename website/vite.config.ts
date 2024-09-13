@@ -13,6 +13,13 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: './build',
       sourcemap: env.NODE_ENV !== 'production',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            later: ['react-share', 'react-dropzone', 'openpgp', 'file-saver'],
+          },
+        },
+      },
     },
     server: {
       port: 3000,
