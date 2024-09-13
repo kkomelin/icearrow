@@ -50,9 +50,10 @@ export default function IndexPage() {
         component="div"
         sx={{
           fontSize: '1.5rem',
-          fontWeight: 400,
+          fontWeight: 300,
           textAlign: 'center',
-          marginBottom: '1.5rem',
+          my: 5,
+          px: 3
         }}
       >
         Encode your secret and share it with a secure one-time link

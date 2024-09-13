@@ -25,7 +25,6 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
           alignItems: 'center',
           flexGrow: 1,
           width: '100%',
-          mt: 4,
         }}
       >
         {children}

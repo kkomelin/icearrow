@@ -3,8 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const Header = () => {
   const name = import.meta.env.VITE_APP_NAME || '';
-  const description = import.meta.env.VITE_APP_DESCRIPTION || '';
-
   const theme = useTheme();
 
   return (
@@ -15,7 +13,7 @@ export const Header = () => {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '30px',
-        marginBottom: '50px',
+        marginBottom: '30px',
         gap: '1rem',
       }}
     >
