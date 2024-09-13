@@ -38,7 +38,6 @@ export const Header = () => {
             border: '2px solid ' + theme.palette.primary.main,
             borderRadius: '50%',
             padding: '5px',
-            boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
           }}
           component="img"
           alt="Ice Arrow Logo"

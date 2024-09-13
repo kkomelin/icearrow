@@ -5,7 +5,6 @@ import { saveAs } from 'file-saver';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from 'react-use';
-import Layout from '../layout/Layout';
 
 const Secret = ({
   secret,
@@ -15,13 +14,13 @@ const Secret = ({
   readonly fileName?: string;
 }) => {
   return (
-    <Layout>
+    <>
       {fileName ? (
         <DownloadSecret fileName={fileName} secret={secret} />
       ) : (
         <RenderSecret secret={secret} />
       )}
-    </Layout>
+    </>
   );
 };
 

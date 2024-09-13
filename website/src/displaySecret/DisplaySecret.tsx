@@ -3,7 +3,6 @@ import { DecryptMessageResult } from 'openpgp';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import Layout from '../layout/Layout';
 import ErrorMessage from '../shared/ErrorMessage';
 import { deleteSecret, getSecret } from '../utils/secret';
 import {
@@ -64,7 +63,7 @@ const DisplaySecret = () => {
   };
 
   return (
-    <Layout>
+    <>
       {value ? (
         <Secret secret={value.data as string} fileName={value.filename} />
       ) : (
@@ -95,7 +94,7 @@ const DisplaySecret = () => {
           </Box>
         </Box>
       )}
-    </Layout>
+    </>
   );
 };
 

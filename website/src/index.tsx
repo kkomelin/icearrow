@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './i18n';
 
+import SplashScreen from './layout/SplashScreen';
 import './styles/main.css';
 
 // @todo: Load fonts from filesystem. Currently using Google Fonts to simplify the deployment. See index.html
@@ -14,7 +15,7 @@ import './styles/main.css';
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<SplashScreen />}>
     <App />
   </Suspense>,
 );
