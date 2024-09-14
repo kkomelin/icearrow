@@ -16,8 +16,9 @@ The recipient opens the link and gets the file encrypted. After that, the link e
 - End-to-End encryption with [OpenPGP](https://openpgpjs.org/)
 - One-time links
 - No account/wallet required
+- Companion Chrome extension [kkomelin/icearrow-extension](https://github.com/kkomelin/icearrow-extension)
 
 ## Credits
 
 The project has been built on top of [Yopass](https://github.com/jhaals/yopass) project. 
-We're extremely grateful to all its contributors for their exceptional work which made IceArrow project possible.
+We're grateful to all its contributors for their exceptional work which made IceArrow project possible.
