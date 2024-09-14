@@ -45,7 +45,7 @@ export const Header = () => {
             padding: '5px',
           }}
           component="img"
-          alt="Ice Arrow Logo"
+          alt="IceArrow Logo"
           src="/logo.png"
         />
 
