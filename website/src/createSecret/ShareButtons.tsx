@@ -28,7 +28,7 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
       }}
     >
       <TelegramShareButton
-        title="Send via Telegram"
+        aria-label="Send via Telegram"
         url={url}
         style={{
           display: 'flex',
@@ -45,7 +45,7 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
       </TelegramShareButton>
 
       <WhatsappShareButton
-        title="Send via Whatsapp"
+        aria-label="Send via Whatsapp"
         url={url}
         separator=":: "
         style={{
@@ -63,7 +63,7 @@ const ShareButtons: FC<IShareButtonsProps> = ({ url, title }) => {
       </WhatsappShareButton>
 
       <EmailShareButton
-        title="Send via email"
+        aria-label="Send via email"
         url={url}
         subject={title}
         style={{
