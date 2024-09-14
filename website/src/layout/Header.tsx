@@ -1,9 +1,8 @@
-import { Box, Link, Typography, useTheme } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Header = () => {
   const name = import.meta.env.VITE_APP_NAME || '';
-  const theme = useTheme();
 
   return (
     <Box
@@ -12,8 +11,8 @@ export const Header = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '30px',
-        marginBottom: '30px',
+        paddingTop: '30px',
+        paddingBottom: '30px',
         gap: '1rem',
       }}
     >

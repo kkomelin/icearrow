@@ -1,18 +1,23 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, useTheme } from '@mui/material';
 import { FC, PropsWithChildren } from 'react';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
         width: '100%',
         height: '100vh',
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        [theme.breakpoints.up('sm')]: {
+          display: 'flex',
+        },
       }}
     >
       <Header />

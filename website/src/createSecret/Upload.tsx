@@ -137,6 +137,7 @@ const Upload = () => {
             borderRadius: '6px',
             padding: '40px',
             marginTop: '6px',
+            marginBottom: '2rem',
             position: 'relative',
           }}
         >
