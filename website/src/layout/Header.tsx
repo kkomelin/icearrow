@@ -28,7 +28,7 @@ export const Header = () => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '0.8rem',
+          gap: '0.5rem',
           '& img': {
             animation: 'rotateAnimation 2s infinite linear',
             animationDelay: '1s',
@@ -38,11 +38,8 @@ export const Header = () => {
         <Box
           sx={{
             verticalAlign: 'middle',
-            width: '30px',
-            height: '30px',
-            border: '2px solid ' + theme.palette.primary.main,
-            borderRadius: '50%',
-            padding: '5px',
+            width: '50px',
+            height: '50px',
           }}
           component="img"
           alt="IceArrow Logo"
