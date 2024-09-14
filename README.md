@@ -2,7 +2,7 @@
 
 IceArrow lets you share a secret message or file with anyone in a quick and secure manner.
 
-The encryption/decryption happens in the browser and the encrypted files are stored on [Walrus](https://walrus.xyz).
+The encryption/decryption happens in the browser and the encrypted content is stored on [Walrus](https://walrus.xyz).
 
 This repository represents the frontend part of the app. The Golang backend is here [b3b/icearrow-server](https://github.com/b3b/icearrow-server).
 
