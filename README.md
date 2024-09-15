@@ -9,7 +9,7 @@ This repository represents the frontend part of the app. The Golang backend is h
 ## How it works
 
 You upload your file, IceArrow encrypts it and gives you a unique link, which you then send through any available channel. 
-The recipient opens the link and gets the file encrypted. After that, the link expires. As easy as that.
+The recipient opens the link and gets the file decrypted. After that, the link expires. As easy as that.
 
 ## Features
 
