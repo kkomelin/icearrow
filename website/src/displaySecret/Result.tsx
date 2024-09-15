@@ -63,6 +63,19 @@ const Result = ({ uuid, password, prefix }: ResultProps) => {
           <ShareButtons url={full} title="Secret" />
         </Box>
       </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {/* TODO: User React Router link to not reload the page */}
+        <Button variant="contained" href="/" sx={{ mt: 6 }}>
+          One more secret?
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { DecryptMessageResult } from 'openpgp';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ErrorMessage from '../shared/ErrorMessage';
 import { deleteSecret, getSecret } from '../utils/secret';
 import {
@@ -30,11 +30,23 @@ const DisplaySecret = () => {
     try {
       // Get blob.
 
-      const data = await getSecret(url);
+      if (password == null) {
+        return setError(new Error('Access denied.'));
+      }
 
-      if (data == null || password == null) {
-        // @todo: handle error better.
-        return;
+      const secretResponse = await getSecret(url);
+      if (secretResponse.status !== 200) {
+        return setError(
+          new Error('Secret not found. Probably revealed already or expired.'),
+        );
+      }
+
+      const data = await secretResponse.json();
+
+      if (data == null) {
+        return setError(
+          new Error('Secret not found. Probably revealed already or expired.'),
+        );
       }
 
       // Decrypt blob.
@@ -64,50 +76,61 @@ const DisplaySecret = () => {
 
   return (
     <>
-      {value ? (
-        <Secret secret={value.data as string} fileName={value.filename} />
+      {value != null ? (
+        <>
+          <Secret secret={value.data as string} fileName={value.filename} />
+          <Button component={Link} variant="contained" to="/" sx={{ mt: 6 }}>
+            Respond securely
+          </Button>
+        </>
       ) : (
         <Box>
-          <Typography
-            variant="h2"
-            color="primary"
-            component="div"
-            sx={{
-              fontSize: '1.5rem',
-              fontWeight: 300,
-              textAlign: 'center',
-              my: 5,
-              px: 3,
-            }}
-          >
-            You've received an encrypted secret. Press the button below to
-            decrypt it.
-          </Typography>
+          {error == null && (
+            <Typography
+              variant="h2"
+              color="primary"
+              component="div"
+              sx={{
+                fontSize: '1.5rem',
+                fontWeight: 300,
+                textAlign: 'center',
+                my: 5,
+                px: 3,
+              }}
+            >
+              You've received an encrypted secret. Press the button below to
+              decrypt it.
+            </Typography>
+          )}
 
           <ErrorMessage
             message={error?.message}
             onClick={() => setError(undefined)}
           />
-          <Box
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            <Button
-              variant="contained"
-              disabled={loading}
-              onClick={() => loadSecret(url, password)}
-            >
-              {loading
-                ? t('display.buttonDecryptLoading')
-                : t('display.buttonDecrypt')}
-            </Button>
-            {loading && <CircularProgress color="primary" size={20} />}
-          </Box>
+          {error == null && (
+            <>
+              <Box
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}
+              >
+                <Button
+                  variant="contained"
+                  disabled={loading}
+                  onClick={() => loadSecret(url, password)}
+                >
+                  {loading
+                    ? t('display.buttonDecryptLoading')
+                    : t('display.buttonDecrypt')}
+                </Button>
+                {loading && <CircularProgress color="primary" size={20} />}
+              </Box>
+            </>
+          )}
         </Box>
       )}
     </>
