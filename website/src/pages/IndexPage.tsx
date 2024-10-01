@@ -56,7 +56,7 @@ export default function IndexPage() {
           px: 3
         }}
       >
-        Encode your secret and share it with a secure one-time link...
+        Encrypt your secret and share it with a secure one-time link...
       </Typography>
       <Box>
         <Tabs value={value} onChange={handleChange} aria-label="tabs" centered>
